@@ -17,6 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('about', function () {
-    return view('about');
-});
+// when a user will visit about page, laravel will load AboutController and it's index() function
+Route::get('about', 'AboutController@index');
