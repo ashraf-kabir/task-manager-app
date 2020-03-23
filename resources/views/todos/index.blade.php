@@ -9,6 +9,11 @@
     <div class="row justify-content-center">
 
         <div class="col-md-8 mb-2">
+            @if (session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
             <div class="card card-default">
                 <div class="card-header">Pending Tasks</div>
                 <div class="card-body">
@@ -24,6 +29,7 @@
                                     <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm float-right mr-1">View</a>
                                 </li>
                             @endif
+                            You don't have any task.
                         @endforeach
                     </ul>
                 </div>
@@ -43,11 +49,12 @@
                                     <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm float-right">View</a>
                                 </li>
                             @endif
+                            You haven't completed anything.
                         @endforeach
                     </ul>
                 </div>
             </div>
         </div>
-        
+
     </div>
 @endsection

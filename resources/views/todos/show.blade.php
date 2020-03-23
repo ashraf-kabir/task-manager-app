@@ -9,6 +9,11 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card card-default">
+                @if (session()->has('success'))
+                    <div class="alert alert-success">
+                        {{ session()->get('success') }}
+                    </div>
+                @endif
                 <div class="card-header">Details</div>
                 <div class="card-body">
                     {{ $todo->description }}
