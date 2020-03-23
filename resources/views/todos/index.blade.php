@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h1 class="text-center md-2">Todos Page</h1>
+    <h1 class="text-center md-2">Task Manager</h1>
     <div class="row justify-content-center">
 
         <div class="col-md-8 mb-2">
@@ -27,7 +27,7 @@
                                     @if (!$todo->completed)
                                         <a href="/todos/{{ $todo->id }}/complete"  class="btn btn-warning btn-sm float-right">Mark Complete</a>
                                     @endif
-                                    <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm float-right mr-1">View</a>
+                                    <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm float-right mr-1">View Details</a>
                                 </li>
                             @endif
                         @endforeach
@@ -47,7 +47,7 @@
                                     {{ $todo->name }}
                                     <br>
                                     <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger btn-sm float-right ml-1">Delete</a>
-                                    <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm float-right">View</a>
+                                    <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm float-right">View Details</a>
                                 </li>
                             @endif
                         @endforeach
