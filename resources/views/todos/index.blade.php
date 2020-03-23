@@ -15,7 +15,7 @@
                 </div>
             @endif
             <div class="card card-default">
-                <div class="card-header">Pending Tasks</div>
+                <div class="card-header text-white bg-danger h5">Pending Tasks</div>
                 <div class="card-body">
                     <ul class="list-group">
                         @foreach ($todos as $todo)
@@ -38,7 +38,7 @@
 
         <div class="col-md-8">
             <div class="card card-default">
-                <div class="card-header">Completed Tasks</div>
+                <div class="card-header text-white bg-success h5">Completed Tasks</div>
                 <div class="card-body">
                     <ul class="list-group">
                         @foreach ($todos as $todo)
