@@ -22,6 +22,7 @@
                             @if (!$todo->completed)
                                 <li class="list-group-item">
                                     {{ $todo->name }}
+                                    <br>
                                     <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger btn-sm float-right ml-1">Delete</a>
                                     @if (!$todo->completed)
                                         <a href="/todos/{{ $todo->id }}/complete"  class="btn btn-warning btn-sm float-right">Mark Complete</a>
@@ -44,6 +45,7 @@
                             @if ($todo->completed)
                                 <li class="list-group-item">
                                     {{ $todo->name }}
+                                    <br>
                                     <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger btn-sm float-right ml-1">Delete</a>
                                     <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm float-right">View</a>
                                 </li>
