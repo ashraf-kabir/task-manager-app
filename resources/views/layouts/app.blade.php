@@ -8,7 +8,6 @@
     <title>@yield('title')</title>
 </head>
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="/">Todos App</a>
@@ -30,6 +29,11 @@
     </nav>
 
     <div class="container">
+        @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+        @endif
         @yield('content')
     </div>
 </body>

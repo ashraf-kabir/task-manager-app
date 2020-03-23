@@ -7,15 +7,10 @@ use Illuminate\Http\Request;
 class TodosController extends Controller
 {
     public function index() {
-        
-        // $todos = Todo::all();
-
         return view('todos.index')->with('todos', Todo::all());
     }
 
     public function show(Todo $todo) {
-        // $todo = Todo::find($todoId);
-
         return view('todos.show')->with('todo', $todo);
     }
     
@@ -25,8 +20,8 @@ class TodosController extends Controller
 
     public function store() {
         $this->validate(request(), [
-            'name' => 'required|min:6|max:12',
-            'description' => 'required'
+            'name' => 'required|min:6|max:24',
+            'description' => 'required|min:12|max:256'
         ]);
 
         $data = request()->all();
@@ -39,6 +34,8 @@ class TodosController extends Controller
 
         $todo->save();
 
+        session()->flash('success', 'Todo created successfully.');
+
         return redirect('/todos');
     }
 
@@ -48,8 +45,8 @@ class TodosController extends Controller
 
     public function update(Todo $todo) {
         $this->validate(request(), [
-            'name' => 'required|min:6|max:12',
-            'description' => 'required'
+            'name' => 'required|min:6|max:24',
+            'description' => 'required|min:12|max:256'
         ]);
 
         $data = request()->all();
@@ -59,11 +56,15 @@ class TodosController extends Controller
 
         $todo->save();
 
+        session()->flash('success', 'Todo updated successfully.');
+
         return redirect('/todos');
     }
 
     public function destroy(Todo $todo) {
         $todo->delete();
+
+        session()->flash('success', 'Todo deleted successfully.');
         
         return redirect('/todos');
     }
