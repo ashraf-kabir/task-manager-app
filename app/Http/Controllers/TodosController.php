@@ -20,8 +20,8 @@ class TodosController extends Controller
 
     public function store() {
         $this->validate(request(), [
-            'name' => 'required|min:6|max:24',
-            'description' => 'required|min:12|max:256'
+            'name' => 'required|min:6|max:36',
+            'description' => 'required|min:6|max:256'
         ]);
 
         $data = request()->all();
@@ -45,8 +45,8 @@ class TodosController extends Controller
 
     public function update(Todo $todo) {
         $this->validate(request(), [
-            'name' => 'required|min:6|max:24',
-            'description' => 'required|min:12|max:256'
+            'name' => 'required|min:6|max:36',
+            'description' => 'required|min:6|max:256'
         ]);
 
         $data = request()->all();
