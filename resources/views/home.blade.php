@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="row justify-content-center mb-2">
-                    <a href="/todos" class="btn btn-primary">View All Todos</a>
+                    <a href="/todos" class="btn btn-primary">View All Tasks</a>
                 </div>
 
             </div>
