@@ -24,11 +24,13 @@
                                     <li class="list-group-item">
                                         {{ $todo->name }}
                                         <br>
-                                        <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger btn-sm float-right ml-1">Delete</a>
-                                        @if (!$todo->completed)
-                                            <a href="/todos/{{ $todo->id }}/complete"  class="btn btn-warning btn-sm float-right">Mark Complete</a>
-                                        @endif
-                                        <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm float-right mr-1">View Details</a>
+                                        <div class="btn-group btn-group-sm float-right" role="group" aria-label="pending">
+                                            <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm">View Details</a>
+                                            @if (!$todo->completed)
+                                                <a href="/todos/{{ $todo->id }}/complete"  class="btn btn-warning">Mark Complete</a>
+                                            @endif
+                                            <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger">Delete</a>
+                                        </div>
                                     </li>
                                 @endif
                             @endforeach
@@ -51,11 +53,13 @@
                                     <li class="list-group-item">
                                         {{ $todo->name }}
                                         <br>
-                                        <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger btn-sm float-right ml-1">Delete</a>
-                                        @if ($todo->completed)
-                                            <a href="/todos/{{ $todo->id }}/incomplete"  class="btn btn-warning btn-sm float-right">Mark Incomplete</a>
-                                        @endif
-                                        <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm float-right mr-1">View Details</a>
+                                        <div class="btn-group btn-group-sm float-right" role="group" aria-label="completed">
+                                            <a href="/todos/{{ $todo->id }}" class="btn btn-primary">View Details</a>
+                                            @if ($todo->completed)
+                                                <a href="/todos/{{ $todo->id }}/incomplete"  class="btn btn-warning">Mark Incomplete</a>
+                                            @endif
+                                            <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger">Delete</a>
+                                        </div>
                                     </li>
                                 @endif
                             @endforeach
