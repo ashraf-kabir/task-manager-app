@@ -35,6 +35,9 @@
                     @if (auth()->user())
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
+                                <a class="nav-link active" href="/home">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link active" href="/new-todos">Create Todos</a>
                             </li>
                         </ul>
