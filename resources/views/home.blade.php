@@ -45,7 +45,8 @@
                 </div>
 
                 <div class="row justify-content-center mb-2">
-                    <a href="/todos" class="btn btn-primary">View All Tasks</a>
+                    <a href="/new-todos" class="btn btn-primary float-left mr-1">Create New</a>
+                    <a href="/todos" class="btn btn-dark float-right ml-1">View All Tasks</a>
                 </div>
 
             </div>
