@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header h5">Dashboard</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,13 +13,41 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    Welcome <strong>{{ Auth::user()->name }}</strong><br>
                     You are logged in!
                 </div>
 
-                <div class="card-body">
-                    <a href="/todos" class="btn btn-primary">View Todos List</a>
+                <div class="row justify-content-center mb-2">    
+                    <div class="col-md-3 m-2">
+                        <div class="card text-white bg-primary">
+                            <div class="card-header text-center">Total Tasks</div>
+                            <div class="card-body text-center">
+                                <h2>{{ $todos_count }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 m-2">
+                        <div class="card text-white bg-danger">
+                            <div class="card-header text-center">Pending Tasks</div>
+                            <div class="card-body text-center">
+                                <h2>{{ $pending_todos }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 m-2">
+                        <div class="card text-white bg-success">
+                            <div class="card-header text-center">Completed Tasks</div>
+                            <div class="card-body text-center">
+                                <h2>{{ $completed_todos }}</h2>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="row justify-content-center mb-2">
+                    <a href="/todos" class="btn btn-primary">View All Todos</a>
+                </div>
+
             </div>
         </div>
     </div>
