@@ -74,8 +74,19 @@ class TodosController extends Controller
 
         $todo->save();
 
-        session()->flash('success', 'Todo completed successfully.');
+        session()->flash('success', 'Todo marked as complete.');
         
         return redirect('/todos');
     }
+
+    public function incomplete(Todo $todo) {
+        $todo->completed = false;
+
+        $todo->save();
+
+        session()->flash('success', 'Todo marked as incomplete.');
+        
+        return redirect('/todos');
+    }
+
 }

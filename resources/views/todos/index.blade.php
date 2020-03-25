@@ -18,19 +18,23 @@
                 <div class="card-header text-white bg-danger h5">Pending Tasks</div>
                 <div class="card-body">
                     <ul class="list-group">
-                        @foreach ($todos as $todo)
-                            @if (!$todo->completed)
-                                <li class="list-group-item">
-                                    {{ $todo->name }}
-                                    <br>
-                                    <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger btn-sm float-right ml-1">Delete</a>
-                                    @if (!$todo->completed)
-                                        <a href="/todos/{{ $todo->id }}/complete"  class="btn btn-warning btn-sm float-right">Mark Complete</a>
-                                    @endif
-                                    <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm float-right mr-1">View Details</a>
-                                </li>
-                            @endif
-                        @endforeach
+                        @if ($todos->where('completed', 0)->count() > 0)
+                            @foreach ($todos as $todo)
+                                @if (!$todo->completed)
+                                    <li class="list-group-item">
+                                        {{ $todo->name }}
+                                        <br>
+                                        <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger btn-sm float-right ml-1">Delete</a>
+                                        @if (!$todo->completed)
+                                            <a href="/todos/{{ $todo->id }}/complete"  class="btn btn-warning btn-sm float-right">Mark Complete</a>
+                                        @endif
+                                        <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm float-right mr-1">View Details</a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        @else
+                            <h5 class="text-center">No pending todos yet</h5>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -41,16 +45,23 @@
                 <div class="card-header text-white bg-success h5">Completed Tasks</div>
                 <div class="card-body">
                     <ul class="list-group">
-                        @foreach ($todos as $todo)
-                            @if ($todo->completed)
-                                <li class="list-group-item">
-                                    {{ $todo->name }}
-                                    <br>
-                                    <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger btn-sm float-right ml-1">Delete</a>
-                                    <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm float-right">View Details</a>
-                                </li>
-                            @endif
-                        @endforeach
+                        @if ($todos->where('completed', 1)->count() > 0)
+                            @foreach ($todos as $todo)
+                                @if ($todo->completed)
+                                    <li class="list-group-item">
+                                        {{ $todo->name }}
+                                        <br>
+                                        <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger btn-sm float-right ml-1">Delete</a>
+                                        @if ($todo->completed)
+                                            <a href="/todos/{{ $todo->id }}/incomplete"  class="btn btn-warning btn-sm float-right">Mark Incomplete</a>
+                                        @endif
+                                        <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm float-right mr-1">View Details</a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        @else
+                            <h5 class="text-center">No completed todos yet</h5>
+                        @endif
                     </ul>
                 </div>
             </div>

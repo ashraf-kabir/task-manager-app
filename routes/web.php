@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('todos/{todo}/update-todos', 'TodosController@update');
     Route::get('todos/{todo}/delete', 'TodosController@destroy');
     Route::get('todos/{todo}/complete', 'TodosController@complete');
+    Route::get('todos/{todo}/incomplete', 'TodosController@incomplete');
     Route::get('users/profile', 'UsersController@edit')->name('users.edit-profile');
     Route::put('users/profile', 'UsersController@update')->name('users.update-profile');
 });
