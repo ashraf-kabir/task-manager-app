@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 class TodosController extends Controller
 {
     public function index() {
-        return view('todos.index')->with('todos', Todo::all());
+        // return view('todos.index')->with('todos', Todo::all());
+        return view('todos.index')->with('todos', Todo::orderBy('created_at', 'DESC')->get());
     }
 
     public function show(Todo $todo) {
