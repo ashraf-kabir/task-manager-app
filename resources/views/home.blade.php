@@ -19,28 +19,34 @@
 
                 <div class="row justify-content-center mb-2">    
                     <div class="col-md-3 m-2">
-                        <div class="card text-white bg-primary">
-                            <div class="card-header text-center">Total Tasks</div>
-                            <div class="card-body text-center">
-                                <h2>{{ $todos_count }}</h2>
+                        <a href="/todos" style="text-decoration: none;">
+                            <div class="card text-white bg-primary">
+                                <div class="card-header text-center">Total Tasks</div>
+                                <div class="card-body text-center">
+                                    <h2>{{ $todos_count }}</h2>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-md-3 m-2">
-                        <div class="card text-white bg-danger">
-                            <div class="card-header text-center">Pending Tasks</div>
-                            <div class="card-body text-center">
-                                <h2>{{ $pending_todos }}</h2>
+                        <a href="/todos" style="text-decoration: none;">
+                            <div class="card text-white bg-danger">
+                                <div class="card-header text-center">Pending Tasks</div>
+                                <div class="card-body text-center">
+                                    <h2>{{ $pending_todos }}</h2>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-md-3 m-2">
-                        <div class="card text-white bg-success">
-                            <div class="card-header text-center">Completed Tasks</div>
-                            <div class="card-body text-center">
-                                <h2>{{ $completed_todos }}</h2>
+                        <a href="/todos" style="text-decoration: none;">
+                            <div class="card text-white bg-success">
+                                <div class="card-header text-center">Completed Tasks</div>
+                                <div class="card-body text-center">
+                                    <h2>{{ $completed_todos }}</h2>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
