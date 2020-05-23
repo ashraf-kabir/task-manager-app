@@ -25,10 +25,10 @@
                                         {{ $todo->name }}
                                         <br>
                                         <div class="btn-group btn-group-sm float-right" role="group" aria-label="pending">
-                                            <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm">View Details</a>
                                             @if (!$todo->completed)
-                                                <a href="/todos/{{ $todo->id }}/complete"  class="btn btn-warning">Mark Complete</a>
+                                                <a href="/todos/{{ $todo->id }}/complete" class="btn btn-success">Mark Complete</a>
                                             @endif
+                                            <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm">View Details</a>
                                             <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger">Delete</a>
                                         </div>
                                     </li>
@@ -54,10 +54,10 @@
                                         {{ $todo->name }}
                                         <br>
                                         <div class="btn-group btn-group-sm float-right" role="group" aria-label="completed">
-                                            <a href="/todos/{{ $todo->id }}" class="btn btn-primary">View Details</a>
                                             @if ($todo->completed)
-                                                <a href="/todos/{{ $todo->id }}/incomplete"  class="btn btn-warning">Mark Incomplete</a>
+                                                <a href="/todos/{{ $todo->id }}/incomplete" class="btn btn-warning">Mark Incomplete</a>
                                             @endif
+                                            <a href="/todos/{{ $todo->id }}" class="btn btn-primary">View Details</a>
                                             <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger">Delete</a>
                                         </div>
                                     </li>
