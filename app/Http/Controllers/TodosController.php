@@ -12,7 +12,7 @@ class TodosController extends Controller
     }
 
     public function show(Todo $todo) {
-        return view('todos.show')->with('todo', $todo);
+        return view('todos.show')->with('todos', $todo);
     }
     
     public function create() {
@@ -65,9 +65,35 @@ class TodosController extends Controller
     public function destroy(Todo $todo) {
         $todo->delete();
 
-        session()->flash('success', 'Todo deleted successfully.');
+        session()->flash('success', 'Todo TRASHED.');
         
         return redirect('/todos');
+    }
+
+    public function trashed() {
+        $todo = Todo::onlyTrashed()->get();
+        
+        return view('todos.trashed')->with('todos', $todo);
+    }
+
+    public function kill($todo) {
+        $todo = Todo::withTrashed()->where('id', $todo)->first();
+        
+        $todo->forceDelete();
+
+        session()->flash('success', 'Todo DELETED permanently.');
+
+        return redirect()->back();
+    }
+
+    public function restore($todo) {
+        $todo = Todo::withTrashed()->where('id', $todo)->first();
+        
+        $todo->restore();
+
+        session()->flash('success', 'Todo RESTORED permanently.');
+
+        return redirect()->back();
     }
 
     public function complete(Todo $todo) {

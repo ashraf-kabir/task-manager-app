@@ -29,7 +29,7 @@
                                                 <a href="/todos/{{ $todo->id }}/complete" class="btn btn-success">Mark Complete</a>
                                             @endif
                                             <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm">View Details</a>
-                                            <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger">Delete</a>
+                                            <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger">Trash</a>
                                         </div>
                                     </li>
                                 @endif
@@ -58,7 +58,7 @@
                                                 <a href="/todos/{{ $todo->id }}/incomplete" class="btn btn-warning">Mark Incomplete</a>
                                             @endif
                                             <a href="/todos/{{ $todo->id }}" class="btn btn-primary">View Details</a>
-                                            <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger">Delete</a>
+                                            <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger">Trash</a>
                                         </div>
                                     </li>
                                 @endif

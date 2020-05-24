@@ -36,6 +36,26 @@ Route::middleware(['auth'])->group(function () {
     Route::get('todos/{todo}/edit', 'TodosController@edit');
     Route::post('todos/{todo}/update-todos', 'TodosController@update');
     Route::get('todos/{todo}/delete', 'TodosController@destroy');
+
+    Route::get('trashed', 'TodosController@trashed');
+    Route::get('trashed/{todo}/kill', 'TodosController@kill');
+    Route::get('trashed/restore/{todo}', 'TodosController@restore');
+
+    // Route::get('trashed', [
+    //     'uses' => 'TodosController@trashed',
+    //     'as' => 'todos.trashed'
+    // ]);
+
+    // Route::get('trashed/{todo}/kill', [
+    //     'uses' => 'TodosController@kill',
+    //     'as' => 'todos.kill'
+    // ]);
+
+    // Route::get('trashed/restore/{todo}', [
+    //     'uses' => 'TodosController@restore',
+    //     'as' => 'todos.restore'
+    // ]);
+
     Route::get('todos/{todo}/complete', 'TodosController@complete');
     Route::get('todos/{todo}/incomplete', 'TodosController@incomplete');
     Route::get('users/profile', 'UsersController@edit')->name('users.edit-profile');

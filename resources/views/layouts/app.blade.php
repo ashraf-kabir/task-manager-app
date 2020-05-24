@@ -40,6 +40,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="/new-todos">Create Todos</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/trashed">View Trash</a>
+                            </li>
                         </ul>
                     @endif
 
