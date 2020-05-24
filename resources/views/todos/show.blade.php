@@ -21,7 +21,7 @@
             </div>
             <a href="/todos" style="color: #fff;" class="btn btn-dark btn-sm my-2">Todos List</a>
             <a href="/todos/{{ $todos->id }}/edit" style="color: #fff;" class="btn btn-info btn-sm my-2">Edit</a>
-            <a href="/todos/{{ $todos->id }}/delete" class="btn btn-danger btn-sm my-2">Delete</a>
+            <a href="/todos/{{ $todos->id }}/delete" class="btn btn-danger btn-sm my-2">Trash</a>
         </div>
     </div>
 @endsection
