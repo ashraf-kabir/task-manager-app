@@ -19,8 +19,12 @@
                 <div class="card-body">
                     <ul class="list-group">
                         @if ($todos->count() > 0)
+                            @php
+                            $i = 1;
+                            @endphp
                             @foreach ($todos as $todo)
                                 <li class="list-group-item">
+                                    {{ $i++ }}.
                                     {{ $todo->name }}
                                     <br>
                                     <div class="btn-group btn-group-sm float-right" role="group" aria-label="pending">
