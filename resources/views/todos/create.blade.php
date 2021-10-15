@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <textarea name="description" placeholder="Description" cols="5" rows="5" class="form-control"></textarea>
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group">
                             <button type="submit" class="btn btn-success">Create Todo</button>
                         </div>
                     </form>

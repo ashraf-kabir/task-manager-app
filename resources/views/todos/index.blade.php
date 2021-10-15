@@ -28,6 +28,7 @@
                                         {{ $i++ }}.
                                         {{ $todo->name }}
                                         <br>
+                                        <span style="font-size: 0.75rem;">Created at: {{ date('d M Y h:i a', strtotime($todo->created_at)) }}</span>
                                         <div class="btn-group btn-group-sm float-right" role="group" aria-label="pending">
                                             @if (!$todo->completed)
                                                 <a href="/todos/{{ $todo->id }}/complete" class="btn btn-success">Mark Complete</a>
@@ -54,13 +55,14 @@
                         @if ($todos->where('completed', 1)->count() > 0)
                             @php
                             $i = 1;
-                            @endphp 
+                            @endphp
                             @foreach ($todos as $todo)
                                 @if ($todo->completed)
                                     <li class="list-group-item">
                                         {{ $i++ }}.
                                         {{ $todo->name }}
                                         <br>
+                                        <span style="font-size: 0.75rem;">Updated at: {{ date('d M Y h:i a', strtotime($todo->updated_at)) }}</span>
                                         <div class="btn-group btn-group-sm float-right" role="group" aria-label="completed">
                                             @if ($todo->completed)
                                                 <a href="/todos/{{ $todo->id }}/incomplete" class="btn btn-warning">Mark Incomplete</a>

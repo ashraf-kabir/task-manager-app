@@ -17,12 +17,12 @@
                     You are logged in!
                 </div>
 
-                <div class="row justify-content-center mb-2">    
+                <div class="row justify-content-center mb-2">
                     <div class="col-md-3 m-2">
                         <a href="/todos" style="text-decoration: none;">
                             <div class="card text-white bg-primary">
                                 <div class="card-header text-center">Total Tasks</div>
-                                <div class="card-body text-center">
+                                <div class="card-body text-center" style="background-color: #6699CC;">
                                     <h2>{{ $todos_count }}</h2>
                                 </div>
                             </div>
@@ -32,7 +32,7 @@
                         <a href="/todos" style="text-decoration: none;">
                             <div class="card text-white bg-danger">
                                 <div class="card-header text-center">Pending Tasks</div>
-                                <div class="card-body text-center">
+                                <div class="card-body text-center" style="background-color: #CD5C5C;">
                                     <h2>{{ $pending_todos }}</h2>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                         <a href="/todos" style="text-decoration: none;">
                             <div class="card text-white bg-success">
                                 <div class="card-header text-center">Completed Tasks</div>
-                                <div class="card-body text-center">
+                                <div class="card-body text-center" style="background-color: #77dd77;">
                                     <h2>{{ $completed_todos }}</h2>
                                 </div>
                             </div>

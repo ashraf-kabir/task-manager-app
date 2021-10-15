@@ -17,6 +17,10 @@
                 <div class="card-header">Details</div>
                 <div class="card-body">
                     {{ $todos->description }}
+                    <br>
+                    <span style="font-size: 0.75rem;">Created at: {{ date('d M Y h:i a', strtotime($todos->created_at)) }}</span>
+                    <br>
+                    <span style="font-size: 0.75rem;">Updated at: {{ date('d M Y h:i a', strtotime($todos->updated_at)) }}</span>
                 </div>
             </div>
             <a href="/todos" style="color: #fff;" class="btn btn-dark btn-sm my-2">Todos List</a>

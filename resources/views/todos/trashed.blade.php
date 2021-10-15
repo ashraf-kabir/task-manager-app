@@ -27,6 +27,7 @@
                                     {{ $i++ }}.
                                     {{ $todo->name }}
                                     <br>
+                                    <span style="font-size: 0.75rem;">Created at: {{ date('d M Y h:i a', strtotime($todo->created_at)) }}</span>
                                     <div class="btn-group btn-group-sm float-right" role="group" aria-label="pending">
                                         <a href="/trashed/restore/{{ $todo->id }}" class="btn btn-success">Restore</a>
                                         <a href="/trashed/{{ $todo->id }}/kill" class="btn btn-danger">Delete</a>
