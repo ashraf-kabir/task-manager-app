@@ -1,6 +1,5 @@
 <?php
 
-use App\User;
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +15,7 @@ class UsersController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        session()->flash('success', 'User updated successfully.');
+        session()->flash('success', 'User UPDATED successfully.');
 
         return redirect()->back();
     }
