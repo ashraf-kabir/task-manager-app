@@ -7,7 +7,7 @@
 @section('content')
     <h1 class="text-center md-2">Create Todos</h1>
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card card-default">
                 <div class="card-header">Create new todo</div>
                 <div class="card-body">
@@ -25,10 +25,11 @@
                     <form action="/store-todos" method="POST">
                         @csrf
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Name" name="name">
+                            <input type="text" class="form-control" placeholder="Name" name="name" value="{{ old('name') }}">
                         </div>
                         <div class="form-group">
-                            <textarea name="description" placeholder="Description" cols="5" rows="5" class="form-control"></textarea>
+                            <textarea class="form-control todo_description" name="description" placeholder="Description"
+                                      cols="5" rows="5">{{ old('description') }}</textarea>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-success">Create Todo</button>

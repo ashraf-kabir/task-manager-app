@@ -8,7 +8,7 @@
     <h1 class="text-center md-2">Task Manager</h1>
     <div class="row justify-content-center">
 
-        <div class="col-md-8 mb-2">
+        <div class="col-md-12 mb-2">
             @if (session()->has('success'))
                 <div class="alert alert-success">
                     {{ session()->get('success') }}

@@ -5,18 +5,18 @@
 @endsection
 
 @section('content')
-    <h1 class="text-center md-2">{{ $todos->name }}</h1>
+    <h2 class="text-center md-2">Details</h2>
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card card-default">
                 @if (session()->has('success'))
                     <div class="alert alert-success">
                         {{ session()->get('success') }}
                     </div>
                 @endif
-                <div class="card-header">Details</div>
+                <div class="card-header h5">{{ $todos->name }}</div>
                 <div class="card-body">
-                    {{ $todos->description }}
+                    {!! $todos->description !!}
                     <br>
                     <span style="font-size: 0.75rem;">Created at: {{ date('d M Y h:i a', strtotime($todos->created_at)) }}</span>
                     <br>

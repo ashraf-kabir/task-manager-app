@@ -23,9 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $todos = Todo::where('user_id', auth()->user()->id)->get();
         return view('home')
-                ->with('todos_count', Todo::all()->count())
-                ->with('pending_todos', Todo::where('completed', '0')->count())
-                ->with('completed_todos', Todo::where('completed', '1')->count());
+                ->with('todos_count', $todos->count())
+                ->with('pending_todos', $todos->where('completed', '0')->count())
+                ->with('completed_todos', $todos->where('completed', '1')->count());
     }
 }

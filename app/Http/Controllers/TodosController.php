@@ -7,11 +7,14 @@ use Illuminate\Http\Request;
 class TodosController extends Controller
 {
     public function index() {
-        // return view('todos.index')->with('todos', Todo::all());
-        return view('todos.index')->with('todos', Todo::orderBy('created_at', 'DESC')->get());
+        $todos = Todo::where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+        return view('todos.index')->with('todos', $todos);
     }
 
     public function show(Todo $todo) {
+        if (auth()->user()->id !== $todo->user_id) {
+            return redirect('/todos');
+        }
         return view('todos.show')->with('todos', $todo);
     }
     
@@ -21,9 +24,11 @@ class TodosController extends Controller
 
     public function store() {
         $this->validate(request(), [
-            'name' => 'required|min:6|max:36',
-            'description' => 'required|min:6|max:256'
+            'name' => 'required|min:6|max:60',
+            'description' => 'required|min:6'
         ]);
+
+        $user_id = auth()->user()->id;
 
         $data = request()->all();
 
@@ -32,32 +37,35 @@ class TodosController extends Controller
         $todo->name = $data['name'];
         $todo->description = $data['description'];
         $todo->completed = false;
+        $todo->user_id = $user_id;
 
         $todo->save();
 
-        session()->flash('success', 'Todo created successfully.');
+        session()->flash('success', 'Todo CREATED successfully.');
 
         return redirect('/todos');
     }
 
     public function edit(Todo $todo) {
+        if (auth()->user()->id !== $todo->user_id) {
+            return redirect('/todos');
+        }
         return view('todos.edit')->with('todo', $todo);
     }
 
     public function update(Todo $todo) {
         $this->validate(request(), [
-            'name' => 'required|min:6|max:36',
-            'description' => 'required|min:6|max:256'
+            'name' => 'required|min:6|max:60',
+            'description' => 'required|min:6'
         ]);
 
         $data = request()->all();
 
         $todo->name = $data['name'];
         $todo->description = $data['description'];
-
         $todo->save();
 
-        session()->flash('success', 'Todo updated successfully.');
+        session()->flash('success', 'Todo UPDATED successfully.');
 
         return redirect('/todos');
     }
@@ -71,9 +79,8 @@ class TodosController extends Controller
     }
 
     public function trashed() {
-        $todo = Todo::onlyTrashed()->get();
-        
-        return view('todos.trashed')->with('todos', $todo);
+        $todos = Todo::where('user_id', auth()->user()->id)->onlyTrashed()->get();
+        return view('todos.trashed')->with('todos', $todos);
     }
 
     public function kill($todo) {
@@ -101,7 +108,7 @@ class TodosController extends Controller
 
         $todo->save();
 
-        session()->flash('success', 'Todo marked as complete.');
+        session()->flash('success', 'Todo marked as COMPLETE.');
         
         return redirect('/todos');
     }
@@ -111,7 +118,7 @@ class TodosController extends Controller
 
         $todo->save();
 
-        session()->flash('success', 'Todo marked as incomplete.');
+        session()->flash('success', 'Todo marked as INCOMPLETE.');
         
         return redirect('/todos');
     }
