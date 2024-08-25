@@ -6,6 +6,9 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProfileRequest extends FormRequest
 {
+    public mixed $name;
+    public mixed $password;
+
     /**
      * Determine if the user is authorized to make this request.
      *
