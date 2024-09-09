@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-  public function update(UpdateProfileRequest $request): \Illuminate\Http\RedirectResponse
+  public function update(UpdateProfileRequest $request)
   {
     $user = auth()->user();
 
@@ -21,7 +21,7 @@ class ProfileController extends Controller
     return redirect()->back();
   }
 
-  public function edit(): \Illuminate\Contracts\View\Factory  | \Illuminate\Contracts\View\View  | \Illuminate\Contracts\Foundation\Application
+  public function edit()
   {
     return view('profile.edit')->with('user', auth()->user());
   }

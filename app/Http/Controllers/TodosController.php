@@ -6,13 +6,13 @@ use App\Todo;
 
 class TodosController extends Controller
 {
-  public function index(): \Illuminate\Contracts\View\Factory  | \Illuminate\Contracts\View\View  | \Illuminate\Contracts\Foundation\Application
+  public function index()
   {
     $todos = Todo::where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
     return view('todos.index')->with('todos', $todos);
   }
 
-  public function show(Todo $todo): \Illuminate\Contracts\View\View  | \Illuminate\Contracts\View\Factory  | \Illuminate\Routing\Redirector  | \Illuminate\Http\RedirectResponse  | \Illuminate\Contracts\Foundation\Application
+  public function show(Todo $todo)
   {
     if (auth()->user()->id !== $todo->user_id) {
       return redirect('/todos');
@@ -20,12 +20,12 @@ class TodosController extends Controller
     return view('todos.show')->with('todos', $todo);
   }
 
-  public function create(): \Illuminate\Contracts\View\Factory  | \Illuminate\Contracts\View\View  | \Illuminate\Contracts\Foundation\Application
+  public function create()
   {
     return view('todos.create');
   }
 
-  public function store(): \Illuminate\Routing\Redirector  | \Illuminate\Contracts\Foundation\Application  | \Illuminate\Http\RedirectResponse
+  public function store()
   {
     $this->validate(request(), [
       'name'        => 'required|min:6|max:60',
@@ -50,7 +50,7 @@ class TodosController extends Controller
     return redirect('/todos');
   }
 
-  public function edit(Todo $todo): \Illuminate\Contracts\View\View  | \Illuminate\Contracts\View\Factory  | \Illuminate\Routing\Redirector  | \Illuminate\Http\RedirectResponse  | \Illuminate\Contracts\Foundation\Application
+  public function edit(Todo $todo)
   {
     if (auth()->user()->id !== $todo->user_id) {
       return redirect('/todos');
@@ -58,7 +58,7 @@ class TodosController extends Controller
     return view('todos.edit')->with('todo', $todo);
   }
 
-  public function update(Todo $todo): \Illuminate\Routing\Redirector  | \Illuminate\Contracts\Foundation\Application  | \Illuminate\Http\RedirectResponse
+  public function update(Todo $todo)
   {
     $this->validate(request(), [
       'name'        => 'required|min:6|max:60',
@@ -76,7 +76,7 @@ class TodosController extends Controller
     return redirect('/todos');
   }
 
-  public function destroy(Todo $todo): \Illuminate\Routing\Redirector  | \Illuminate\Contracts\Foundation\Application  | \Illuminate\Http\RedirectResponse
+  public function destroy(Todo $todo)
   {
     $todo->delete();
 
@@ -85,13 +85,13 @@ class TodosController extends Controller
     return redirect('/todos');
   }
 
-  public function trashed(): \Illuminate\Contracts\View\Factory  | \Illuminate\Contracts\View\View  | \Illuminate\Contracts\Foundation\Application
+  public function trashed()
   {
     $todos = Todo::where('user_id', auth()->user()->id)->onlyTrashed()->get();
     return view('todos.trashed')->with('todos', $todos);
   }
 
-  public function kill($todo): \Illuminate\Http\RedirectResponse
+  public function kill($todo)
   {
     $todo = Todo::withTrashed()->where('id', $todo)->first();
 
@@ -102,7 +102,7 @@ class TodosController extends Controller
     return redirect()->back();
   }
 
-  public function restore($todo): \Illuminate\Http\RedirectResponse
+  public function restore($todo)
   {
     $todo = Todo::withTrashed()->where('id', $todo)->first();
 
@@ -113,7 +113,7 @@ class TodosController extends Controller
     return redirect()->back();
   }
 
-  public function complete(Todo $todo): \Illuminate\Routing\Redirector  | \Illuminate\Contracts\Foundation\Application  | \Illuminate\Http\RedirectResponse
+  public function complete(Todo $todo)
   {
     $todo->completed = TRUE;
 
@@ -124,7 +124,7 @@ class TodosController extends Controller
     return redirect('/todos');
   }
 
-  public function incomplete(Todo $todo): \Illuminate\Routing\Redirector  | \Illuminate\Contracts\Foundation\Application  | \Illuminate\Http\RedirectResponse
+  public function incomplete(Todo $todo)
   {
     $todo->completed = FALSE;
 
