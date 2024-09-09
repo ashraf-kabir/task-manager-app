@@ -40,6 +40,11 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="/home">Dashboard</a>
                             </li>
+                            @if (auth()->user()->isAdmin())
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{{ route('users.index') }}">Users</a>
+                                </li>
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link active" href="/new-todos">Create Todos</a>
                             </li>
@@ -64,8 +69,13 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @if (auth()->user())
-                                        <a class="dropdown-item" href="{{ route('users.edit-profile') }}">
+                                        <a class="dropdown-item" href="{{ route('profile.edit-profile') }}">
                                             My Profile
+                                        </a>
+                                    @endif
+                                    @if (auth()->user()->isAdmin())
+                                        <a class="dropdown-item" href="{{ route('users.index') }}">
+                                            Users
                                         </a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"

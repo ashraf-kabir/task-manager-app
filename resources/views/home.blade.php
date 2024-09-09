@@ -8,6 +8,16 @@
             <div class="card-header h5">Dashboard</div>
 
             <div class="card-body">
+                @if (session('error'))
+                    <div class="alert alert-danger" role="alert">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                {{ session('error') }}
+                            </li>
+                        </ul>
+                    </div>
+                @endif
+
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
@@ -50,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="row justify-content-center mb-2">
+            <div class="row justify-content-center mb-4">
                 <a href="/new-todos" class="btn btn-primary float-left mr-1">Create New</a>
                 <a href="/todos" class="btn btn-dark float-right ml-1">View All Tasks</a>
             </div>

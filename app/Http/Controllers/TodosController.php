@@ -6,121 +6,133 @@ use App\Todo;
 
 class TodosController extends Controller
 {
-    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application {
-        $todos = Todo::where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
-        return view('todos.index')->with('todos', $todos);
+  public function index(): \Illuminate\Contracts\View\Factory  | \Illuminate\Contracts\View\View  | \Illuminate\Contracts\Foundation\Application
+  {
+    $todos = Todo::where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+    return view('todos.index')->with('todos', $todos);
+  }
+
+  public function show(Todo $todo): \Illuminate\Contracts\View\View  | \Illuminate\Contracts\View\Factory  | \Illuminate\Routing\Redirector  | \Illuminate\Http\RedirectResponse  | \Illuminate\Contracts\Foundation\Application
+  {
+    if (auth()->user()->id !== $todo->user_id) {
+      return redirect('/todos');
     }
+    return view('todos.show')->with('todos', $todo);
+  }
 
-    public function show(Todo $todo): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application {
-        if (auth()->user()->id !== $todo->user_id) {
-            return redirect('/todos');
-        }
-        return view('todos.show')->with('todos', $todo);
+  public function create(): \Illuminate\Contracts\View\Factory  | \Illuminate\Contracts\View\View  | \Illuminate\Contracts\Foundation\Application
+  {
+    return view('todos.create');
+  }
+
+  public function store(): \Illuminate\Routing\Redirector  | \Illuminate\Contracts\Foundation\Application  | \Illuminate\Http\RedirectResponse
+  {
+    $this->validate(request(), [
+      'name'        => 'required|min:6|max:60',
+      'description' => 'required|min:6'
+    ]);
+
+    $user_id = auth()->user()->id;
+
+    $data = request()->all();
+
+    $todo = new Todo();
+
+    $todo->name        = $data['name'];
+    $todo->description = $data['description'];
+    $todo->completed   = FALSE;
+    $todo->user_id     = $user_id;
+
+    $todo->save();
+
+    session()->flash('success', 'Todo CREATED successfully.');
+
+    return redirect('/todos');
+  }
+
+  public function edit(Todo $todo): \Illuminate\Contracts\View\View  | \Illuminate\Contracts\View\Factory  | \Illuminate\Routing\Redirector  | \Illuminate\Http\RedirectResponse  | \Illuminate\Contracts\Foundation\Application
+  {
+    if (auth()->user()->id !== $todo->user_id) {
+      return redirect('/todos');
     }
+    return view('todos.edit')->with('todo', $todo);
+  }
 
-    public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application {
-        return view('todos.create');
-    }
+  public function update(Todo $todo): \Illuminate\Routing\Redirector  | \Illuminate\Contracts\Foundation\Application  | \Illuminate\Http\RedirectResponse
+  {
+    $this->validate(request(), [
+      'name'        => 'required|min:6|max:60',
+      'description' => 'required|min:6'
+    ]);
 
-    public function store(): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse {
-        $this->validate(request(), [
-            'name'        => 'required|min:6|max:60',
-            'description' => 'required|min:6'
-        ]);
+    $data = request()->all();
 
-        $user_id = auth()->user()->id;
+    $todo->name        = $data['name'];
+    $todo->description = $data['description'];
+    $todo->save();
 
-        $data = request()->all();
+    session()->flash('success', 'Todo UPDATED successfully.');
 
-        $todo = new Todo();
+    return redirect('/todos');
+  }
 
-        $todo->name        = $data['name'];
-        $todo->description = $data['description'];
-        $todo->completed   = FALSE;
-        $todo->user_id     = $user_id;
+  public function destroy(Todo $todo): \Illuminate\Routing\Redirector  | \Illuminate\Contracts\Foundation\Application  | \Illuminate\Http\RedirectResponse
+  {
+    $todo->delete();
 
-        $todo->save();
+    session()->flash('success', 'Todo TRASHED.');
 
-        session()->flash('success', 'Todo CREATED successfully.');
+    return redirect('/todos');
+  }
 
-        return redirect('/todos');
-    }
+  public function trashed(): \Illuminate\Contracts\View\Factory  | \Illuminate\Contracts\View\View  | \Illuminate\Contracts\Foundation\Application
+  {
+    $todos = Todo::where('user_id', auth()->user()->id)->onlyTrashed()->get();
+    return view('todos.trashed')->with('todos', $todos);
+  }
 
-    public function edit(Todo $todo): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application {
-        if (auth()->user()->id !== $todo->user_id) {
-            return redirect('/todos');
-        }
-        return view('todos.edit')->with('todo', $todo);
-    }
+  public function kill($todo): \Illuminate\Http\RedirectResponse
+  {
+    $todo = Todo::withTrashed()->where('id', $todo)->first();
 
-    public function update(Todo $todo): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse {
-        $this->validate(request(), [
-            'name'        => 'required|min:6|max:60',
-            'description' => 'required|min:6'
-        ]);
+    $todo->forceDelete();
 
-        $data = request()->all();
+    session()->flash('success', 'Todo DELETED permanently.');
 
-        $todo->name        = $data['name'];
-        $todo->description = $data['description'];
-        $todo->save();
+    return redirect()->back();
+  }
 
-        session()->flash('success', 'Todo UPDATED successfully.');
+  public function restore($todo): \Illuminate\Http\RedirectResponse
+  {
+    $todo = Todo::withTrashed()->where('id', $todo)->first();
 
-        return redirect('/todos');
-    }
+    $todo->restore();
 
-    public function destroy(Todo $todo): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse {
-        $todo->delete();
+    session()->flash('success', 'Todo RESTORED permanently.');
 
-        session()->flash('success', 'Todo TRASHED.');
+    return redirect()->back();
+  }
 
-        return redirect('/todos');
-    }
+  public function complete(Todo $todo): \Illuminate\Routing\Redirector  | \Illuminate\Contracts\Foundation\Application  | \Illuminate\Http\RedirectResponse
+  {
+    $todo->completed = TRUE;
 
-    public function trashed(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application {
-        $todos = Todo::where('user_id', auth()->user()->id)->onlyTrashed()->get();
-        return view('todos.trashed')->with('todos', $todos);
-    }
+    $todo->save();
 
-    public function kill($todo): \Illuminate\Http\RedirectResponse {
-        $todo = Todo::withTrashed()->where('id', $todo)->first();
+    session()->flash('success', 'Todo marked as COMPLETE.');
 
-        $todo->forceDelete();
+    return redirect('/todos');
+  }
 
-        session()->flash('success', 'Todo DELETED permanently.');
+  public function incomplete(Todo $todo): \Illuminate\Routing\Redirector  | \Illuminate\Contracts\Foundation\Application  | \Illuminate\Http\RedirectResponse
+  {
+    $todo->completed = FALSE;
 
-        return redirect()->back();
-    }
+    $todo->save();
 
-    public function restore($todo): \Illuminate\Http\RedirectResponse {
-        $todo = Todo::withTrashed()->where('id', $todo)->first();
+    session()->flash('success', 'Todo marked as INCOMPLETE.');
 
-        $todo->restore();
-
-        session()->flash('success', 'Todo RESTORED permanently.');
-
-        return redirect()->back();
-    }
-
-    public function complete(Todo $todo): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse {
-        $todo->completed = TRUE;
-
-        $todo->save();
-
-        session()->flash('success', 'Todo marked as COMPLETE.');
-
-        return redirect('/todos');
-    }
-
-    public function incomplete(Todo $todo): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse {
-        $todo->completed = FALSE;
-
-        $todo->save();
-
-        session()->flash('success', 'Todo marked as INCOMPLETE.');
-
-        return redirect('/todos');
-    }
+    return redirect('/todos');
+  }
 
 }

@@ -7,14 +7,33 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Todo extends Model
 {
-    use SoftDeletes;
+  use SoftDeletes;
 
-    /**
-     * @var false|mixed
-     */
-    public mixed $completed;
-    public mixed $name;
-    public mixed $description;
-    public mixed $user_id;
-    protected    $dates = ['deleted_at'];
+  protected $fillable = [
+    'name', 'description', 'completed', 'user_id'
+  ];
+
+  public function user()
+  {
+    return $this->belongsTo(User::class);
+  }
+
+  public function isCompleted()
+  {
+    return $this->completed;
+  }
+
+  public function markAsCompleted()
+  {
+    $this->completed = TRUE;
+    $this->save();
+    return $this;
+  }
+
+  public function markAsUncompleted()
+  {
+    $this->completed = FALSE;
+    $this->save();
+    return $this;
+  }
 }
