@@ -2,15 +2,18 @@
 
 ## Laravel Task Manager Application
  
- 1. user can add new task, edit, mark complete/incomplete and delete them
- 2. user can see the list of tasks
- 3. user can change password
+ 1. User can add new task, edit, mark complete/incomplete and delete them
+ 2. User can see the list of tasks
+ 3. User can change password
+ 4. Admin can add admin & regular users
+ 5. Admin can set user status active/inactive
+ 6. Every admin can have their own user group
 
 ## Project information
 1. Framework: Laravel ^7.0
 2. Database: MySQL
 
-## setup instructions
+## Setup Instructions
 
 `composer install`
 
