@@ -41,7 +41,7 @@ class TodosController extends Controller
     $todo->name        = $data['name'];
     $todo->description = $data['description'];
     $todo->completed   = FALSE;
-    $todo->pin_to_top  = $data['pin_to_top'] ?? FALSE;
+    $todo->pin_to_top  = isset($data['pin_to_top']) ? TRUE : FALSE;
     $todo->user_id     = $user_id;
 
     $todo->save();
@@ -70,7 +70,7 @@ class TodosController extends Controller
 
     $todo->name        = $data['name'];
     $todo->description = $data['description'];
-    $todo->pin_to_top  = $data['pin_to_top'] ?? FALSE;
+    $todo->pin_to_top  = isset($data['pin_to_top']) ? TRUE : FALSE;
     $todo->save();
 
     session()->flash('success', 'Todo UPDATED successfully.');
