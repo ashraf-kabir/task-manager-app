@@ -12,16 +12,6 @@ class ProfileController extends Controller
   {
     $user = auth()->user();
 
-    $request->validate([
-      'name'    => 'required',
-      'phone'   => 'required',
-      'address' => 'required',
-      'city'    => 'required',
-      'state'   => 'required',
-      'zip'     => 'required',
-      'country' => 'required'
-    ]);
-
     $user->update([
       'name' => $request->name
     ]);

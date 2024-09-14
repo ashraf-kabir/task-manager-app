@@ -26,8 +26,8 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input type="text" class="form-control" name="phone" id="phone" value="{{ $profile->phone }}">
+                                <label for="phone">Phone <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="phone" id="phone" value="{{ $profile->phone ?? NULL }}">
                             </div>
                         </div>
                     </div>
@@ -35,8 +35,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control" name="address" id="address" value="{{ $profile->address }}">
+                                <label for="address">Address <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="address" id="address" value="{{ $profile->address ?? NULL }}">
                             </div>
                         </div>
                     </div>
@@ -44,15 +44,15 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="city">City</label>
-                                <input type="text" class="form-control" name="city" id="city" value="{{ $profile->city }}">
+                                <label for="city">City <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="city" id="city" value="{{ $profile->city ?? NULL }}">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="state">State</label>
-                                <input type="text" class="form-control" name="state" id="state" value="{{ $profile->state }}">
+                                <label for="state">State <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="state" id="state" value="{{ $profile->state ?? NULL }}">
                             </div>
                         </div>
                     </div>
@@ -60,15 +60,15 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="zip">Zip</label>
-                                <input type="text" class="form-control" name="zip" id="zip" value="{{ $profile->zip }}">
+                                <label for="zip">Zip <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="zip" id="zip" value="{{ $profile->zip ?? NULL }}">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="country">Country</label>
-                                <input type="text" class="form-control" name="country" id="country" value="{{ $profile->country }}">
+                                <label for="country">Country <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="country" id="country" value="{{ $profile->country ?? NULL }}">
                             </div>
                         </div>
                     </div>

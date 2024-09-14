@@ -24,7 +24,7 @@
                     @method('PUT')
 
                     <div class="form-group">
-                        <label for="current_password">Current Password</label>
+                        <label for="current_password">Current Password <span class="text-danger">*</span></label>
                         <input type="password" class="form-control @error('current_password') is-invalid @enderror" name="current_password" id="current_password" required>
                         @error('current_password')
                             <span class="invalid-feedback" role="alert">
@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password">New Password</label>
+                        <label for="password">New Password <span class="text-danger">*</span></label>
                         <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" required>
                         @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password_confirmation">Confirm New Password</label>
+                        <label for="password_confirmation">Confirm New Password <span class="text-danger">*</span></label>
                         <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" required>
                     </div>
 
