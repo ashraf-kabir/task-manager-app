@@ -8,7 +8,7 @@ class TodosController extends Controller
 {
   public function index()
   {
-    $todos = Todo::where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+    $todos = Todo::where('user_id', auth()->user()->id)->orderBy('pin_to_top', 'DESC')->orderBy('created_at', 'DESC')->get();
     return view('todos.index')->with('todos', $todos);
   }
 
@@ -41,6 +41,7 @@ class TodosController extends Controller
     $todo->name        = $data['name'];
     $todo->description = $data['description'];
     $todo->completed   = FALSE;
+    $todo->pin_to_top  = $data['pin_to_top'] ?? FALSE;
     $todo->user_id     = $user_id;
 
     $todo->save();
@@ -69,6 +70,7 @@ class TodosController extends Controller
 
     $todo->name        = $data['name'];
     $todo->description = $data['description'];
+    $todo->pin_to_top  = $data['pin_to_top'] ?? FALSE;
     $todo->save();
 
     session()->flash('success', 'Todo UPDATED successfully.');
@@ -131,6 +133,28 @@ class TodosController extends Controller
     $todo->save();
 
     session()->flash('success', 'Todo marked as INCOMPLETE.');
+
+    return redirect('/todos');
+  }
+
+  public function pin(Todo $todo)
+  {
+    $todo->pin_to_top = TRUE;
+
+    $todo->save();
+
+    session()->flash('success', 'Todo pinned to top.');
+
+    return redirect('/todos');
+  }
+
+  public function unpin(Todo $todo)
+  {
+    $todo->pin_to_top = FALSE;
+
+    $todo->save();
+
+    session()->flash('success', 'Todo unpinned from top.');
 
     return redirect('/todos');
   }

@@ -33,6 +33,11 @@
                                             @if (!$todo->completed)
                                                 <a href="/todos/{{ $todo->id }}/complete" class="btn btn-success">Complete</a>
                                             @endif
+                                            @if ($todo->pin_to_top)
+                                                <a href="/todos/{{ $todo->id }}/unpin" class="btn btn-link">Unpin</a>
+                                            @else
+                                                <a href="/todos/{{ $todo->id }}/pin" class="btn btn-dark">Pin</a>
+                                            @endif
                                             <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm">Details</a>
                                             <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger">Trash</a>
                                         </div>
@@ -65,9 +70,14 @@
                                         <span style="font-size: 0.75rem;">Updated at: {{ date('d M Y h:i a', strtotime($todo->updated_at)) }}</span>
                                         <div class="btn-group btn-group-sm float-right" role="group" aria-label="completed">
                                             @if ($todo->completed)
-                                                <a href="/todos/{{ $todo->id }}/incomplete" class="btn btn-warning">Mark Incomplete</a>
+                                                <a href="/todos/{{ $todo->id }}/incomplete" class="btn btn-warning">Incomplete</a>
                                             @endif
-                                            <a href="/todos/{{ $todo->id }}" class="btn btn-primary">View Details</a>
+                                            @if ($todo->pin_to_top)
+                                                <a href="/todos/{{ $todo->id }}/unpin" class="btn btn-link">Unpin</a>
+                                            @else
+                                                <a href="/todos/{{ $todo->id }}/pin" class="btn btn-dark">Pin</a>
+                                            @endif
+                                            <a href="/todos/{{ $todo->id }}" class="btn btn-primary">Details</a>
                                             <a href="/todos/{{ $todo->id }}/delete" class="btn btn-danger">Trash</a>
                                         </div>
                                     </li>

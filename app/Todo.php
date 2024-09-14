@@ -10,7 +10,7 @@ class Todo extends Model
   use SoftDeletes;
 
   protected $fillable = [
-    'name', 'description', 'completed', 'user_id'
+    'name', 'description', 'completed', 'pin_to_top', 'user_id'
   ];
 
   public function user()

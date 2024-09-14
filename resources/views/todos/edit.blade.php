@@ -31,6 +31,10 @@
                             <textarea name="description" cols="5" rows="5" class="form-control todo_description">{{ $todo->description }}</textarea>
                         </div>
                         <div class="form-group">
+                            <input type="checkbox" name="pin_to_top" id="pin_to_top" {{ $todo->pin_to_top ? 'checked' : '' }}>
+                            <label for="pin_to_top">Pin to top</label>
+                        </div>
+                        <div class="form-group">
                             <button type="submit" class="btn btn-success">Update Todo</button>
                         </div>
                     </form>

@@ -32,6 +32,10 @@
                                       cols="5" rows="5">{{ old('description') }}</textarea>
                         </div>
                         <div class="form-group">
+                            <input type="checkbox" name="pin_to_top" id="pin_to_top">
+                            <label for="pin_to_top">Pin to top</label>
+                        </div>
+                        <div class="form-group">
                             <button type="submit" class="btn btn-success">Create Todo</button>
                         </div>
                     </form>

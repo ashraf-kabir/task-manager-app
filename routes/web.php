@@ -43,6 +43,9 @@ Route::middleware(['auth', 'isActive'])->group(function () {
   Route::get('todos/{todo}/complete', 'TodosController@complete');
   Route::get('todos/{todo}/incomplete', 'TodosController@incomplete');
 
+  Route::get('todos/{todo}/pin', 'TodosController@pin');
+  Route::get('todos/{todo}/unpin', 'TodosController@unpin');
+
   // Profile Routes
   Route::get('profile', 'ProfileController@edit')->name('profile.edit-profile');
   Route::put('profile', 'ProfileController@update')->name('profile.update-profile');
