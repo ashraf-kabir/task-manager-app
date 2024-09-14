@@ -16,7 +16,6 @@ class CreateProfilesTable extends Migration
     Schema::create('profiles', function (Blueprint $table) {
       $table->id();
       $table->unsignedBigInteger('user_id');
-      $table->unsignedBigInteger('company_id')->nullable();
       $table->string('phone')->nullable();
       $table->string('address')->nullable();
       $table->string('city')->nullable();
@@ -27,7 +26,6 @@ class CreateProfilesTable extends Migration
 
       // Foreign key constraints
       $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-      $table->foreign('company_id')->references('id')->on('companies')->onDelete('set null');
     });
   }
 

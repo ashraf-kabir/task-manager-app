@@ -72,6 +72,9 @@
                                         <a class="dropdown-item" href="{{ route('profile.edit-profile') }}">
                                             My Profile
                                         </a>
+                                        <a class="dropdown-item" href="{{ route('password.edit-password') }}">
+                                            Change Password
+                                        </a>
                                     @endif
                                     @if (auth()->user()->isAdmin())
                                         <a class="dropdown-item" href="{{ route('users.index') }}">

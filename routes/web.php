@@ -47,6 +47,10 @@ Route::middleware(['auth', 'isActive'])->group(function () {
   Route::get('profile', 'ProfileController@edit')->name('profile.edit-profile');
   Route::put('profile', 'ProfileController@update')->name('profile.update-profile');
 
+  // Password Routes
+  Route::get('change-password', 'PasswordController@edit')->name('password.edit-password');
+  Route::put('change-password', 'PasswordController@update')->name('password.update-password');
+
   // User Routes - Admin only
   Route::middleware(['isAdmin'])->group(function () {
     Route::get('users', 'UsersController@index')->name('users.index');

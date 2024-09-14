@@ -15,6 +15,7 @@ class CreateCompaniesTable extends Migration
   {
     Schema::create('companies', function (Blueprint $table) {
       $table->id();
+      $table->unsignedBigInteger('user_id');
       $table->string('name');
       $table->string('address')->nullable();
       $table->string('city')->nullable();
@@ -22,6 +23,9 @@ class CreateCompaniesTable extends Migration
       $table->string('zip')->nullable();
       $table->string('country')->nullable();
       $table->timestamps();
+
+      // Foreign key constraints
+      $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
     });
   }
 
