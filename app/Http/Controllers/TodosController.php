@@ -41,13 +41,11 @@ class TodosController extends Controller
     $todo->name        = $data['name'];
     $todo->description = $data['description'];
     $todo->completed   = FALSE;
-    $todo->pin_to_top  = isset($data['pin_to_top']) ? TRUE : FALSE;
+    $todo->pin_to_top  = isset($data['pin_to_top']);
     $todo->user_id     = $user_id;
-
     $todo->save();
 
     session()->flash('success', 'Todo CREATED successfully.');
-
     return redirect('/todos');
   }
 
@@ -70,11 +68,10 @@ class TodosController extends Controller
 
     $todo->name        = $data['name'];
     $todo->description = $data['description'];
-    $todo->pin_to_top  = isset($data['pin_to_top']) ? TRUE : FALSE;
+    $todo->pin_to_top  = isset($data['pin_to_top']);
     $todo->save();
 
     session()->flash('success', 'Todo UPDATED successfully.');
-
     return redirect('/todos');
   }
 
@@ -83,7 +80,6 @@ class TodosController extends Controller
     $todo->delete();
 
     session()->flash('success', 'Todo TRASHED.');
-
     return redirect('/todos');
   }
 
@@ -96,66 +92,54 @@ class TodosController extends Controller
   public function kill($todo)
   {
     $todo = Todo::withTrashed()->where('id', $todo)->first();
-
     $todo->forceDelete();
 
     session()->flash('success', 'Todo DELETED permanently.');
-
     return redirect()->back();
   }
 
   public function restore($todo)
   {
     $todo = Todo::withTrashed()->where('id', $todo)->first();
-
     $todo->restore();
 
     session()->flash('success', 'Todo RESTORED permanently.');
-
     return redirect()->back();
   }
 
   public function complete(Todo $todo)
   {
     $todo->completed = TRUE;
-
     $todo->save();
 
     session()->flash('success', 'Todo marked as COMPLETE.');
-
     return redirect('/todos');
   }
 
   public function incomplete(Todo $todo)
   {
     $todo->completed = FALSE;
-
     $todo->save();
 
     session()->flash('success', 'Todo marked as INCOMPLETE.');
-
     return redirect('/todos');
   }
 
   public function pin(Todo $todo)
   {
     $todo->pin_to_top = TRUE;
-
     $todo->save();
 
     session()->flash('success', 'Todo pinned to top.');
-
     return redirect('/todos');
   }
 
   public function unpin(Todo $todo)
   {
     $todo->pin_to_top = FALSE;
-
     $todo->save();
 
     session()->flash('success', 'Todo unpinned from top.');
-
     return redirect('/todos');
   }
 

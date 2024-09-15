@@ -22,7 +22,6 @@ class PasswordController extends Controller
 
     if (!\Hash::check($request->current_password, $user->password)) {
       session()->flash('error', 'Current password does not match.');
-
       return redirect()->back();
     }
 
@@ -31,7 +30,6 @@ class PasswordController extends Controller
     ]);
 
     session()->flash('success', 'Password UPDATED successfully.');
-
     return redirect()->back();
   }
 }

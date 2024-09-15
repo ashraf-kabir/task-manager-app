@@ -85,11 +85,9 @@ class UsersController extends Controller
     $user->password  = bcrypt($data['password']);
     $user->is_admin  = 0;
     $user->is_active = 1;
-
     $user->save();
 
     session()->flash('success', $user->name . ' added successfully.');
-
     return redirect('/users');
   }
 
@@ -119,24 +117,14 @@ class UsersController extends Controller
       return redirect('/users');
     }
 
-    $user->name     = $data['name'];
+    $user->name = $data['name'];
 
     if (!empty($data['password'])) {
       $user->password = bcrypt($data['password']);
     }
-
     $user->save();
 
     session()->flash('success', $user->name . ' UPDATED successfully.');
-
-    return redirect('/users');
-  }
-
-  public function resetPassword(User $user)
-  {
-    $user->password = bcrypt('password');
-    $user->save();
-    session()->flash('success', 'User password reset successfully.');
     return redirect('/users');
   }
 }

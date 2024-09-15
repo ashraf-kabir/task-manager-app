@@ -35,7 +35,6 @@ class CompanyController extends Controller
     }
 
     session()->flash('success', 'Company UPDATED successfully.');
-
     return redirect()->back();
   }
 
