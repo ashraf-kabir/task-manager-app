@@ -28,8 +28,8 @@ class UpdateCompanyRequest extends FormRequest
       'phone'   => 'required|string|max:20',
       'address' => 'required|string|max:255',
       'city'    => 'required|string|max:100',
-      'state'   => 'nullable|string|max:100',
-      'zip'     => 'nullable|string|max:20',
+      'state'   => 'required|string|max:100',
+      'zip'     => 'required|string|max:20',
       'country' => 'required|string|max:100'
     ];
   }
@@ -46,6 +46,8 @@ class UpdateCompanyRequest extends FormRequest
       'phone.required'   => 'The company phone is required.',
       'address.required' => 'The company address is required.',
       'city.required'    => 'The company city is required.',
+      'state.required'   => 'The company state is required.',
+      'zip.required'     => 'The company zip is required.',
       'country.required' => 'The company country is required.'
     ];
   }

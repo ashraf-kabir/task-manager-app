@@ -13,18 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
+Route::get('/', function() {
   return redirect(route('login'));
 });
 
 Auth::routes([
-  'register' => false, // Registration Routes...
-  'reset' => false, // Password Reset Routes...
-  'verify' => false // Email Verification Routes...
+  'register' => FALSE, // Registration Routes...
+  'reset'    => FALSE, // Password Reset Routes...
+  'verify'   => FALSE // Email Verification Routes...
 ]);
 
 // Group routes that require authentication
-Route::middleware(['auth', 'isActive'])->group(function () {
+Route::middleware(['auth', 'isActive'])->group(function() {
   Route::get('/home', 'HomeController@index')->name('home');
 
   // Todo Routes
@@ -46,16 +46,17 @@ Route::middleware(['auth', 'isActive'])->group(function () {
   Route::get('todos/{todo}/pin', 'TodosController@pin');
   Route::get('todos/{todo}/unpin', 'TodosController@unpin');
 
-  // Profile Routes
   Route::get('profile', 'ProfileController@edit')->name('profile.edit-profile');
   Route::put('profile', 'ProfileController@update')->name('profile.update-profile');
 
-  // Password Routes
+  Route::get('company', 'CompanyController@edit')->name('company.edit-company');
+  Route::put('company', 'CompanyController@update')->name('company.update-company');
+
   Route::get('change-password', 'PasswordController@edit')->name('password.edit-password');
   Route::put('change-password', 'PasswordController@update')->name('password.update-password');
 
   // User Routes - Admin only
-  Route::middleware(['isAdmin'])->group(function () {
+  Route::middleware(['isAdmin'])->group(function() {
     Route::get('users', 'UsersController@index')->name('users.index');
     Route::post('users/make-admin/{id}', 'UsersController@makeAdmin')->name('users.make-admin');
     Route::post('users/make-regular/{id}', 'UsersController@makeRegular')->name('users.make-regular');

@@ -8,11 +8,17 @@
           {{ session()->get('success') }}
         </div>
       @endif
+      @if(session()->has('error'))
+        <div class="alert alert-danger">
+          {{ session()->get('error') }}
+        </div>
+      @endif
+
       <div class="card">
-        <div class="card-header">My Profile</div>
+        <div class="card-header">Company Profile</div>
 
         <div class="card-body">
-          <form action="{{ route('profile.update-profile') }}" method="POST">
+          <form action="{{ route('company.update-company') }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -20,14 +26,22 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="name">Name <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" name="name" id="name" value="{{ $user->name }}">
+                  <input type="text" class="form-control" name="name" id="name"
+                         value="{{ old('name', $company->name ?? NULL) }}">
+                  @error('name')
+                  <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="phone">Phone <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" name="phone" id="phone" value="{{ $profile->phone ?? NULL }}">
+                  <input type="text" class="form-control" name="phone" id="phone"
+                         value="{{ old('phone', $company->phone ?? NULL) }}">
+                  @error('phone')
+                  <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
               </div>
             </div>
@@ -37,7 +51,10 @@
                 <div class="form-group">
                   <label for="address">Address <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" name="address" id="address"
-                         value="{{ $profile->address ?? NULL }}">
+                         value="{{ old('address', $company->address ?? NULL) }}">
+                  @error('address')
+                  <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
               </div>
             </div>
@@ -46,14 +63,22 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="city">City <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" name="city" id="city" value="{{ $profile->city ?? NULL }}">
+                  <input type="text" class="form-control" name="city" id="city"
+                         value="{{ old('city', $company->city ?? NULL) }}">
+                  @error('city')
+                  <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="state">State <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" name="state" id="state" value="{{ $profile->state ?? NULL }}">
+                  <input type="text" class="form-control" name="state" id="state"
+                         value="{{ old('state', $company->state ?? NULL) }}">
+                  @error('state')
+                  <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
               </div>
             </div>
@@ -62,7 +87,11 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="zip">Zip <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" name="zip" id="zip" value="{{ $profile->zip ?? NULL }}">
+                  <input type="text" class="form-control" name="zip" id="zip"
+                         value="{{ old('zip', $company->zip ?? NULL) }}">
+                  @error('zip')
+                  <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
               </div>
 
@@ -70,7 +99,10 @@
                 <div class="form-group">
                   <label for="country">Country <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" name="country" id="country"
-                         value="{{ $profile->country ?? NULL }}">
+                         value="{{ old('country', $company->country ?? NULL) }}">
+                  @error('country')
+                  <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
               </div>
             </div>

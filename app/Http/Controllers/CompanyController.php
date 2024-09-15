@@ -15,6 +15,7 @@ class CompanyController extends Controller
 
     if (!empty($company)) {
       $company->update([
+        'name'    => $request->name,
         'phone'   => $request->phone,
         'address' => $request->address,
         'city'    => $request->city,
@@ -25,6 +26,7 @@ class CompanyController extends Controller
     } else {
       Company::create([
         'user_id' => $user->id,
+        'name'    => $request->name,
         'phone'   => $request->phone,
         'address' => $request->address,
         'city'    => $request->city,

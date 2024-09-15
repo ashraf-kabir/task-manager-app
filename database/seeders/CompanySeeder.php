@@ -20,11 +20,12 @@ class CompanySeeder extends Seeder
     Company::create([
       'user_id' => $user->id,
       'name'    => 'Vegas Liquidation',
+      'phone'   => '123-456-7890',
       'address' => '3020 N Walnut Rd Unit 120',
       'city'    => 'Las Vegas',
       'state'   => 'NV',
       'zip'     => '89115',
-      'country' => 'United States of America'
+      'country' => 'USA'
     ]);
   }
 }
