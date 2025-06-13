@@ -30,3 +30,76 @@ note: edit .env to set your DB, user, password
 `php artisan key:generate`
 
 `php artisan serve`
+
+
+### Deployment
+
+```bash
+
+```
+
+```bash
+mkdir -p /var/www/todos.vegasliquidationstore.com
+mkdir -p /var/www/todos.vegasliquidationstore.com/htdocs
+```
+
+```bash
+cp -a task-manager-app/. /var/www/todos.vegasliquidationstore.com/htdocs/
+```
+
+```bash
+sudo chown -R $USER:$USER /var/www/todos.vegasliquidationstore.com
+sudo chmod -R 755 /var/www/todos.vegasliquidationstore.com
+```
+
+```bash
+sudo nano /etc/nginx/sites-available/todos.vegasliquidationstore.com
+```
+
+```nginx
+server {
+    listen 80;
+    server_name todos.vegasliquidationstore.com;
+
+    root /var/www/todos.vegasliquidationstore.com/htdocs/public;
+    index index.php index.html index.htm;
+
+    access_log /var/log/nginx/todos_access.log;
+    error_log /var/log/nginx/todos_error.log;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock; # Adjust PHP version as needed
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+```
+
+```bash
+sudo ln -s /etc/nginx/sites-available/todos.vegasliquidationstore.com /etc/nginx/sites-enabled/
+```
+
+```bash
+sudo nginx -t
+```
+
+```bash
+sudo systemctl restart nginx
+```
+
+```bash
+sudo certbot --nginx -d todos.vegasliquidationstore.com
+```
+
+```bash
+sudo systemctl restart php7.4-fpm
+```
