@@ -35,10 +35,6 @@ note: edit .env to set your DB, user, password
 ### Deployment
 
 ```bash
-
-```
-
-```bash
 mkdir -p /var/www/todos.vegasliquidationstore.com
 mkdir -p /var/www/todos.vegasliquidationstore.com/htdocs
 ```
