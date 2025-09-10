@@ -1,12 +1,15 @@
 <?php
 
 namespace Database\Factories;
-use Faker\Generator as Faker;
 
-$factory->define(\App\Todo::class, function (Faker $faker) {
-    return [
-        'name' => $faker->sentence(3),
-        'description' => $faker->paragraph(4),
-        'completed' => false
-    ];
+use App\Todo;
+use Faker\Factory as Faker;
+
+$factory->define(Todo::class, function () use ($faker) {
+  $faker = Faker::create();
+  return [
+    'name'        => $faker->sentence(3),
+    'description' => $faker->paragraph(4),
+    'completed'   => false
+  ];
 });
